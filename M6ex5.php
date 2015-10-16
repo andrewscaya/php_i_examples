@@ -9,7 +9,8 @@ $current .= "{$course[0]}, $course[1]}, $course[2]}, $course[3]}\n";
 // Write the contents back to the file
 file_put_contents($file, $current);
 */
-$fh = fopen($file, 'w');
+$fh = fopen($file, 'a+');
+// fputcsv automatically adds enclosures '"' around CSV text elements.
 fputcsv($fh, $course);
 rewind($fh);
 fpassthru($fh);
