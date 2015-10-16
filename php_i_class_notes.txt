@@ -1,0 +1,41 @@
+PHP I NOTES
+
+
+35 slides per session
+
+[001] Module 1: Introduction to Programming -------------------------------------------------------
+
+
+[024] Module 2: Language Basics -------------------------------------------------------------------
+
+
+[055] Module 3: PHP Identifiers -------------------------------------------------------------------
+
+
+[083] Module 4: PHP Control Flow Basics -----------------------------------------------------------
+
+
+[140] Module 5: PHP Function Basics ---------------------------------------------------------------
+
+
+[165] Module 6: File System Basics ----------------------------------------------------------------
+
+
+[194] Module 7: PHP Web Concepts ------------------------------------------------------------------
+Session Save Handlers:
+1. Depends on installation; use phpinfo() to find list for your server
+2. Default = "files"
+   This is documented here: http://php.net/manual/en/function.session-set-save-handler.php
+3. You can write your own using the SessionHandler class
+   see: http://php.net/manual/en/class.sessionhandler.php
+4. There are some alternatives to "files" listed in pecl.php.net
+   memsession:    http://pecl.php.net/package/memsession
+   session_mysql: http://pecl.php.net/package/session_mysql
+
+[213] Module 8: Database Basics -------------------------------------------------------------------
+
+
+[230] Module 9: Developing PHP Apps Basics --------------------------------------------------------
+
+
+[244] Module10: Challenge Project -----------------------------------------------------------------
