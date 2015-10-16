@@ -10,7 +10,7 @@ $userMessage = '';
 
 if (isset($_COOKIE['loggedin'])) {
     
-    require_once './session_example.php';
+    require_once './andrew_session_example.php';
 	
 	if ($validSession == TRUE) {
 	
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
     && array_key_exists($_POST['username'], $fakeDB)
     && $_POST['password'] == $fakeDB[$_POST['username']]) {
 		    
-	    require_once './session_example.php';
+	    require_once './andrew_session_example.php';
 		
 		if ($validSession == TRUE) {
 		    
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
             	session_destroy();   // Destroy session data in storage.
                 session_unset();     // Unset $_SESSION variable for the runtime.
                 $validSession = FALSE;
-                header("location: session_cookie_login_example.php?lo=2");
+                header("location: andrew_session_cookie_login_example.php?lo=2");
                 exit;
 		    
 		    }
@@ -67,7 +67,6 @@ if (isset($_POST['submit'])) {
 if (isset($_POST['logout'])) {
 			
 	require_once './session_example.php';
-	session_regenerate_id();
 	session_write_close();
 	setcookie(session_name(),'', time() - 3600, '/');
 	setcookie('loggedin', '', time() - 3600, '/');
@@ -75,7 +74,7 @@ if (isset($_POST['logout'])) {
 	session_destroy();   // Destroy session data in storage.
 	session_unset();     // Unset $_SESSION variable for the runtime.
 	$postLoginForm = TRUE;
-	header("location: session_cookie_login_example.php?lo=1");
+	header("location: andrew_session_cookie_login_example.php?lo=1");
 	exit;
 
 }
@@ -124,7 +123,7 @@ if ($postLoginForm == TRUE) {
 	    
 	} else {
 	    
-	    $htmlOut .= '<p>Welcome, ' . $_SESSION['REMOTE_USER'] . ' !<br />You are logged in.<br /><br /><a href="session_cookie_login_example.php?check=1">Check cookie</a></p>';
+	    $htmlOut .= '<p>Welcome, ' . $_SESSION['REMOTE_USER'] . ' !<br />You are logged in.<br /><br /><a href="andrew_session_cookie_login_example.php?check=1">Check cookie</a></p>';
 	}
 	
 	$htmlOut .= '<form action="" method="post">';

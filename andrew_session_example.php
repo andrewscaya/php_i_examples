@@ -67,7 +67,7 @@ if ($validSession == TRUE) {
     
         if ($_SESSION['HTTP_USER_AGENT'] != md5($useragent)) {
     
-            session_regenerate_id();
+            //session_regenerate_id();
     		session_write_close();
     		setcookie(session_name(),'', time() - 3600, '/');
     		setcookie('loggedin', '', time() - 3600, '/');
@@ -89,7 +89,7 @@ if ($validSession == TRUE) {
     if ($validSession == TRUE && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > 3600) {
         
         // Last request was more than 60 minutes ago.
-    	session_regenerate_id();
+    	//session_regenerate_id();
     	session_write_close();
     	setcookie(session_name(),'', time() - 3600, '/');
     	setcookie('loggedin', '', time() - 3600, '/');
