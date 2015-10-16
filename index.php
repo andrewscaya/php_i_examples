@@ -1,6 +1,6 @@
-<?php require("redirect-login.php");?>
+<?php require("redirect-login.php"); ?>
 	<head>
-		<title>Test</title>
+		<title>Index</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		
@@ -25,8 +25,8 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">		
 				<ul class="nav navbar-nav">
-					<li><a href="index.php">Home</a></li>
-					<li class="active"><a href="test.php">Test</a></li>
+					<li class="active"><a href="index.php">Home</a></li>
+					<li><a href="test.php">Test</a></li>
 					<li><a href="?logout=Logout">Logout</a></li>
 				</ul>
 				</div><!--/.nav-collapse -->
@@ -36,12 +36,12 @@
 		<div class="container">
 	
 			<div class="col-lg-10" style="padding: 40px 15px;text-align: center;">		
-				<h1>Test Page</h1>
+				<h1>Hello!</h1>
 				<p class="lead">
-					<a href="index.php">Next ></a>
+					<a href="test.php">< Back</a>
 				</p>
 			</div>
-	
+				
 		</div><!-- /.container -->		
 		
 	</body>
