@@ -14,7 +14,7 @@ if (isset($_COOKIE['loggedin'])) {
 	
 	if ($validSession == TRUE) {
 	
-		$postLoginForm = FALSE;
+            $postLoginForm = FALSE;
 	
 	}
     
@@ -24,40 +24,40 @@ if (isset($_COOKIE['loggedin'])) {
 if (isset($_POST['submit'])) {
 
 	if ($_POST['submit'] == 1
-    && array_key_exists($_POST['username'], $fakeDB)
-    && $_POST['password'] == $fakeDB[$_POST['username']]) {
+            && array_key_exists($_POST['username'], $fakeDB)
+            && $_POST['password'] == $fakeDB[$_POST['username']]) {
 		    
 	    require_once './andrew_session_example.php';
 		
 		if ($validSession == TRUE) {
 		    
 		    if (isset($_SESSION['LOGGEDIN'])) {
-		    
-		        session_regenerate_id();
-            	session_write_close();
-            	setcookie(session_name(),'', time() - 3600, '/');
-            	setcookie('loggedin', '', time() - 3600, '/');
-            	$_SESSION = array();
-            	session_destroy();   // Destroy session data in storage.
-                session_unset();     // Unset $_SESSION variable for the runtime.
-                $validSession = FALSE;
-                header("location: andrew_session_cookie_login_example.php?lo=2");
-                exit;
+		        
+		        //session_regenerate_id();
+                        session_write_close();
+                        setcookie(session_name(),'', time() - 3600, '/');
+                        setcookie('loggedin', '', time() - 3600, '/');
+                        $_SESSION = array();
+                        session_destroy();   // Destroy session data in storage.
+                        session_unset();     // Unset $_SESSION variable for the runtime.
+                        $validSession = FALSE;
+                        header("location: andrew_session_cookie_login_example.php?lo=2");
+                        exit;
 		    
 		    }
 		
-			setcookie('loggedin', TRUE, time()+ 4200, '/');
-			session_set_cookie_params(4200);
-			$_SESSION['LOGGEDIN'] = TRUE;
-			$_SESSION['REMOTE_USER'] = $_POST['username'];
-			$postLoginForm = FALSE;
+                    setcookie('loggedin', TRUE, time()+ 4200, '/');
+                    session_set_cookie_params(4200);
+                    $_SESSION['LOGGEDIN'] = TRUE;
+                    $_SESSION['REMOTE_USER'] = $_POST['username'];
+                    $postLoginForm = FALSE;
 		
 		}
 		
 	} else {
 		
-			$postLoginForm = TRUE;
-			$userMessage = 'Wrong credentials.  Try again.';
+            $postLoginForm = TRUE;
+            $userMessage = 'Wrong credentials.  Try again.';
 		
 	}
 	
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
 // Intercept logout POST.
 if (isset($_POST['logout'])) {
 			
-	require_once './session_example.php';
+	require_once './andrew_session_example.php';
 	session_write_close();
 	setcookie(session_name(),'', time() - 3600, '/');
 	setcookie('loggedin', '', time() - 3600, '/');
