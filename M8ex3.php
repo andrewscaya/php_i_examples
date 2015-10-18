@@ -1,16 +1,16 @@
 <?php
 include 'common_functions.php';
 
-$all = getCustomers();
-echo json_encode($all);
+echo "All Customers\n";
+echo json_encode(getCustomers());
 echo PHP_EOL;
 
-$all = getOrdersByCustomer(3);
-echo json_encode($all);
+echo "Jason Flores\n";
+echo json_encode(getOrdersByCustomer(3));
 echo PHP_EOL;
 
-$all = buildCustomerSelect();
-echo htmlspecialchars($all);
+echo "Customer SELECT\n";
+echo buildCustomerSelect();
 echo PHP_EOL;
 
 

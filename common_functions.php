@@ -46,19 +46,15 @@ function getStaticOrders($num = 1)
 
 /**
  * Opens and returns connection
- * @param bool $close == TRUE == close connection
  * @return resource MySQL connection
  */
-function getConnection($close = FALSE)
+function getConnection()
 {
 	static $link = NULL;
-	if ($close) {
-		mysqli_close($link);
-		return FALSE;	
-	} elseif ($link === NULL) {
+	if ($link === NULL) {
 		$link = mysqli_connect('127.0.0.1', 'phpi', 'password', 'php1');
-		return $link;	
 	}
+	return $link;	
 }
 
 function getQuote()
@@ -110,7 +106,6 @@ function queryResults($query)
     $link = getConnection();
     $result = mysqli_query($link, $query);
     $value = mysqli_fetch_all($result, MYSQLI_ASSOC);   
-    mysqli_close($link);     
     // NOTE: if a large data set you will need to 
     //       iterate through the results using while() and fetch
     return $value;   
@@ -124,7 +119,6 @@ function queryResults($query)
 function buildCustomerSelect($custId = 0)
 {
 	$list = getCustomers();
-	var_dump($list); exit;
 	$select = '<select name="custId">';
 	foreach ($list as $customer) {
 		if ($custId == $customer['id']) {
