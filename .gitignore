@@ -1,5 +1,6 @@
-/.settings/
-/.project
-/deployment.properties
-/deployment.xml
+.settings/
+.project
+deployment.properties
+deployment.xml
+deployment*
 
