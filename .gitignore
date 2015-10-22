@@ -1,6 +1,6 @@
 .settings/
 .project
+.buildpath
 deployment.properties
 deployment.xml
-deployment*
 
