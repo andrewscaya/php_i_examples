@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 
 ALTER TABLE `users`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`);
 
 
 ALTER TABLE `users`
