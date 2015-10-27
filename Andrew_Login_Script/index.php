@@ -14,7 +14,9 @@ ob_start();
 require_once './andrew_session_example.inc.php';
 
 // Fake backend.
-$fakeDB = ['Doug' => 'pass', 'Andrew' => 'pass2'];
+//$fakeDB = ['Doug' => 'pass', 'Andrew' => 'pass2'];
+
+require_once './andrew_mysql_example.inc.php';
 
 // Set flags.
 $loginCheck = FALSE;
@@ -58,44 +60,64 @@ if (isset($_COOKIE['loggedin'])) {
 }
 
 // Login verification.
-if (isset($_POST['submit'])) {
-    
-    $checkDone = TRUE;
+if (isset($_POST['submit'])
+    && $_POST['submit'] == 1
+    && !empty($_POST['username'])
+    && !empty($_POST['password'])) {
     
     if ($validSession === FALSE) {
     
         $validSession = session_secure_init();
     
     }
+    
+    $username = (string) $_POST['username'];
+    
+    $password = (string) $_POST['password'];
+    
+    if (!ctype_alpha($username)) {
+    
+        $username = preg_replace("/[^a-zA-Z]+/", "", $username);
+    
+    }
+    
+    $password = preg_replace("/[^a-zA-Z0-9]+/", "", $password);
 
-    if ($_POST['submit'] == 1
-        && array_key_exists($_POST['username'], $fakeDB)
-        && $_POST['password'] == $fakeDB[$_POST['username']]) {
-		
-	if ($validSession === TRUE) {
+/*
+ *    // Check credentials against fake backend.
+ *    if (array_key_exists($_POST['username'], $fakeDB)
+ *        && $_POST['password'] == $fakeDB[$_POST['username']]) {
+*/
+    
+    // Check credentials.
+    if (checkLogin($username, $password)) {
+        
+        if ($validSession === TRUE) {
 		    
-	    //  Check for cookie tampering.
-	    if (isset($_SESSION['LOGGEDIN'])) {
+            //  Check for cookie tampering.
+            if (isset($_SESSION['LOGGEDIN'])) {
 		        
                 $validSession = session_obliterate();
-	        $errorMessage = 3;
-	        $postLoginForm = TRUE;
+                $errorMessage = 3;
+                $postLoginForm = TRUE;
 		    
-	    } else {
+            } else {
 		
                 setcookie('loggedin', TRUE, time()+ 4200, '/');
                 session_set_cookie_params(4200);
                 $_SESSION['LOGGEDIN'] = TRUE;
-                $_SESSION['REMOTE_USER'] = $_POST['username'];
+                $_SESSION['REMOTE_USER'] = $username;
                 $postLoginForm = FALSE;
             
-	    }
+            }
 		
-	} else {
+        } else {
 		    
-	    $validSession = session_obliterate();
+            $validSession = session_obliterate();
+            $errorMessage = 3;
+            $postLoginForm = TRUE;
 		    
-	}
+        }
 		
     } else {
 		
@@ -125,6 +147,7 @@ if (isset($_POST['logout'])) {
 
 }
 
+// Intercept invalid sessions and redirect to login page.
 if ($loginCheck === TRUE && $validSession === FALSE && $errorMessage === 0) {
     
     if ($validSession === FALSE) {
