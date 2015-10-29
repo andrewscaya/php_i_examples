@@ -2,21 +2,19 @@
 /**
  * Andrew's Session App
  *
- * @package		Andrew's Session App
- * @author		Andrew Caya
- * @since		Version 2.0
- * @license http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @package    Andrew's Session App
+ * @author     Andrew Caya
+ * @link       https://github.com/andrewscaya
+ * @version    2.0.1
+ * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  */
 
 // Start output buffering.
 ob_start();
 
-require_once './andrew_session_example.inc.php';
-
-// Fake backend.
-//$fakeDB = ['Doug' => 'pass', 'Andrew' => 'pass2'];
-
 require_once './andrew_mysql_example.inc.php';
+
+require_once './andrew_session_example.inc.php';
 
 // Set flags.
 $loginCheck = FALSE;
@@ -83,12 +81,6 @@ if (isset($_POST['submit'])
     
     $password = preg_replace("/[^a-zA-Z0-9]+/", "", $password);
 
-/*
- *    // Check credentials against fake backend.
- *    if (array_key_exists($_POST['username'], $fakeDB)
- *        && $_POST['password'] == $fakeDB[$_POST['username']]) {
-*/
-    
     // Check credentials.
     if (checkLogin($username, $password)) {
         

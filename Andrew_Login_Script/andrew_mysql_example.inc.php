@@ -1,4 +1,20 @@
 <?php
+/**
+ * Andrew's Session App
+ *
+ * @package    Andrew's Session App
+ * @author     Andrew Caya
+ * @link       https://github.com/andrewscaya
+ * @version    2.0.1
+ * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ */
+/**
+ * Functions getConnection and getQuote 
+ * Another contributor authored these functions
+ * 
+ * @author     Doug Bierer
+ * @link       http://unlikelysource.com
+ */
 
 function getConnection()
 {
@@ -30,6 +46,8 @@ function queryResults($query)
     $result = mysqli_query($link, $query);
     
     $values = mysqli_fetch_assoc($result);
+    
+    mysqli_close($link);
 
     return $values;
     
