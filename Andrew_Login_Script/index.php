@@ -5,7 +5,7 @@
  * @package    Andrew's Session App
  * @author     Andrew Caya
  * @link       https://github.com/andrewscaya
- * @version    2.0.1
+ * @version    2.1.0
  * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  */
 
@@ -79,7 +79,19 @@ if (isset($_POST['submit'])
     
     }
     
-    $password = preg_replace("/[^a-zA-Z0-9]+/", "", $password);
+    if (strlen($username) > 40) {
+        
+        $username = substr($username, 0, 39);
+        
+    }
+    
+    $password = preg_replace("/[^_a-zA-Z0-9]+/", "", $password);
+    
+    if (strlen($password) > 40) {
+    
+        $password = substr($password, 0, 39);
+    
+    }
 
     // Check credentials.
     if (checkLogin($username, $password)) {
@@ -134,8 +146,8 @@ if (isset($_POST['logout'])) {
     }
     
     $validSession = session_obliterate();
-	$errorMessage = 2;
-	$postLoginForm = TRUE;
+    $errorMessage = 2;
+    $postLoginForm = TRUE;
 
 }
 
@@ -198,13 +210,21 @@ if ($postLoginForm === TRUE) {
     if ($errorMessage === 0) {
 
         $htmlOut .= "\t<div class=\"container\">\n";
-    	$htmlOut .= "\t\t<form class=\"form-signin\" action=\"index.php\" method=\"post\">\n";
+    	$htmlOut .= "\t\t<form class=\"form-signin\" action=\"index.php\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
     	$htmlOut .= "\t\t\t<h2 class=\"form-signin-heading\">" . $userMessage . "</h2>\n";
     	$htmlOut .= "\t\t\t<div class=\"form-group\">\n";
-    	$htmlOut .= "\t\t\t\tUsername: <input class=\"form-control\" placeholder=\"Username\" type=\"text\" name=\"username\" required autofocus>\n";
-    	$htmlOut .= "\t\t\t\tPassword: <input class=\"form-control\" placeholder=\"Password\" type=\"password\" name=\"password\" required>\n";
+    	$htmlOut .= "\t\t\t\t<label for=\"inputUsername\" class=\"control-label\">Username:</label>\n";
+    	$htmlOut .= "\t\t\t\t<input class=\"form-control\" id=\"inputUsername\" name=\"username\" placeholder=\"Username\" type=\"text\" pattern=\"^[a-zA-Z]+$\" maxlength=\"40\" data-error=\"Invalid character.\" required autofocus>\n";
+    	$htmlOut .= "\t\t\t\t<div class=\"help-block with-errors\"></div>\n";
     	$htmlOut .= "\t\t\t</div>\n";
-    	$htmlOut .= "\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"submit\" type=\"submit\" value=\"1\">Submit</button>\n";
+    	$htmlOut .= "\t\t\t<div class=\"form-group\">\n";
+    	$htmlOut .= "\t\t\t\t<label for=\"inputPassword\" class=\"control-label\">Password:</label>\n";
+    	$htmlOut .= "\t\t\t\t<input class=\"form-control\" id=\"inputPassword\" name=\"password\" placeholder=\"Password\" type=\"password\" pattern=\"^[_a-zA-Z0-9]+$\" maxlength=\"40\" data-error=\"Invalid character.\" required>\n";
+    	$htmlOut .= "\t\t\t\t<div class=\"help-block with-errors\"></div>\n";
+    	$htmlOut .= "\t\t\t</div>\n";
+    	$htmlOut .= "\t\t\t<div class=\"form-group\">\n";
+    	$htmlOut .= "\t\t\t\t<button class=\"btn btn-lg btn-primary btn-block\" name=\"submit\" type=\"submit\" value=\"1\">Submit</button>\n";
+    	$htmlOut .= "\t\t\t</div>\n";
     	$htmlOut .= "\t\t</form>\n";
     	$htmlOut .= "\t</div> <!-- /container -->\n\n";
 
@@ -224,7 +244,9 @@ if ($postLoginForm === TRUE) {
     $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
     $htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
     $htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
-    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n\n";
+    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n";
+    $htmlOut .= "\t<!-- Form validator for Bootstrap 3 -->\n";
+    $htmlOut .= "\t<script src=\"js/validator.min.js\"></script>\n\n";
     $htmlOut .= "</body>\n\n";
     $htmlOut .= "</html>";
 
@@ -248,6 +270,11 @@ if ($postLoginForm === TRUE) {
     $htmlOut .= "\t\t<script src=\"js/html5shiv.min.js\"></script>\n";
     $htmlOut .= "\t\t<script src=\"js/respond.min.js\"></script>\n";
     $htmlOut .= "\t<![endif]-->\n\n";
+    $htmlOut .= "\t<style media=\"screen\" type=\"text/css\">\n\n";
+    $htmlOut .= "\t\t.container {\n";
+    $htmlOut .= "\t\t\tmax-width: 480px;\n";
+    $htmlOut .= "\t\t}\n\n";
+    $htmlOut .= "\t</style>\n\n";
     $htmlOut .= "</head>\n\n";
     $htmlOut .= "<body>\n\n";
     $htmlOut .= "\t<div class=\"container theme-showcase\" role=\"main\">\n";
@@ -256,11 +283,11 @@ if ($postLoginForm === TRUE) {
 	
     if (isset($_GET["check"])) {
 	    
-        $htmlOut .= "\t\t\t<h2>Hello, " . $_SESSION["REMOTE_USER"] . "!<br /><br /><br />You are still logged in.<br /><br /><br /><br /></h2>\n";
+        $htmlOut .= "\t\t\t<h2>Hello, " . $_SESSION['REMOTE_USER'] . "!<br /><br /><br />You are still logged in.<br /><br /><br /><br /></h2>\n";
 	    
     } else {
 	    
-        $htmlOut .= "\t\t\t<h2>Welcome, " . $_SESSION["REMOTE_USER"] . "!<br /><br /><br />You are logged in.</h2><br /><br /><p><a href=\"index.php?check=1\">Check cookie</a><br /><br /><br /><br /></p>\n";
+        $htmlOut .= "\t\t\t<h2>Welcome, " . $_SESSION['REMOTE_USER'] . "!<br /><br /><br />You are logged in.</h2><br /><br /><p><a href=\"index.php?check=1\">Check cookie</a><br /><br /><br /><br /></p>\n";
     }
 	
     $htmlOut .= "\t\t\t<form action=\"index.php\" method=\"post\">\n";
@@ -273,7 +300,7 @@ if ($postLoginForm === TRUE) {
     $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
     $htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
     $htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
-    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n\n";
+    $htmlOut .= "\t<script src=\"js/ie10-viewport-bug-workaround.js\"></script>\n\n";    
     $htmlOut .= "</body>\n\n";
     $htmlOut .= "</html>";
 

@@ -5,7 +5,7 @@
  * @package    Andrew's Session App
  * @author     Andrew Caya
  * @link       https://github.com/andrewscaya
- * @version    2.0.1
+ * @version    2.1.0
  * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  */
 
@@ -109,7 +109,7 @@ function session_secure_init()
             
         } else {
         
-        	$_SESSION['LAST_ACTIVITY'] = time(); // Update last activity timestamp.
+            $_SESSION['LAST_ACTIVITY'] = time(); // Update last activity timestamp.
         
         }
     
