@@ -10,7 +10,6 @@
  */
 
 function session_obliterate()
-
 {
     
     $_SESSION = array();
@@ -24,7 +23,6 @@ function session_obliterate()
 }
 
 function session_secure_init()
-
 {
 
     $validSession = TRUE;
