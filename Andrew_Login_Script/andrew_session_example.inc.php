@@ -76,7 +76,7 @@ function session_secure_init()
         
         if (time() - $_SESSION['CREATED'] > 3600) {
         
-            // Session started more than 60 minates ago.
+            // Session started more than 60 minutes ago.
             session_regenerate_id();    // Change session ID for the current session an invalidate old session ID.
             $_SESSION['CREATED'] = time();  // Update creation time.
         
