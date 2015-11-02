@@ -48,11 +48,13 @@ function getStaticOrders($num = 1)
  * Opens and returns connection
  * @return resource MySQL connection
  */
-function getConnection()
+function getConnection($getLink = TRUE)
 {
 	static $link = NULL;
 	if ($link === NULL) {
 		$link = mysqli_connect('127.0.0.1', 'phpi', 'password', 'php1');
+	} elseif ($getLink === FALSE) {
+	    mysqli_close($link);
 	}
 	return $link;	
 }
