@@ -61,10 +61,10 @@ function session_secure_init()
     if ($validSession == TRUE) {
         
         // Avoid session fixation.
-        if (!isset($_SESSION['initiated'])) {
+        if (!isset($_SESSION['INITIATED'])) {
         
             session_regenerate_id();
-            $_SESSION['initiated'] = TRUE;
+            $_SESSION['INITIATED'] = TRUE;
         
         }
         
