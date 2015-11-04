@@ -38,6 +38,6 @@ $cust   = ($custId) ? getCustomers(['id' => $custId])[0] : array();
                 <?php endfor; ?>
             </tbody>
         </table>
-    <?php endif; ?>
+    <?php endif; getConnection(FALSE); ?>
 </body>
 </html>

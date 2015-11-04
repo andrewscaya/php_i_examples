@@ -5,7 +5,7 @@
  * @package    Andrew's Session App
  * @author     Andrew Caya
  * @link       https://github.com/andrewscaya
- * @version    2.0.1
+ * @version    2.1.0
  * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  */
 /**
@@ -16,7 +16,7 @@
  * @link       http://unlikelysource.com
  */
 
-function getConnection()
+function getConnection($getLink = TRUE)
 {
     
     static $link = NULL;
@@ -24,6 +24,10 @@ function getConnection()
     if ($link === NULL) {
         
         $link = mysqli_connect('127.0.0.1', 'phpi', 'password', 'andrew_session_app');
+        
+    } elseif ($getLink === FALSE) {
+        
+        mysqli_close($link);
         
     }
     
@@ -47,7 +51,7 @@ function queryResults($query)
     
     $values = mysqli_fetch_assoc($result);
     
-    mysqli_close($link);
+    getConnection(FALSE);
 
     return $values;
     

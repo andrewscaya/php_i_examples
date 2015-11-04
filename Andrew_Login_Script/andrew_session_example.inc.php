@@ -5,12 +5,11 @@
  * @package    Andrew's Session App
  * @author     Andrew Caya
  * @link       https://github.com/andrewscaya
- * @version    2.0.1
+ * @version    2.1.0
  * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  */
 
 function session_obliterate()
-
 {
     
     $_SESSION = array();
@@ -24,7 +23,6 @@ function session_obliterate()
 }
 
 function session_secure_init()
-
 {
 
     $validSession = TRUE;
@@ -61,10 +59,10 @@ function session_secure_init()
     if ($validSession == TRUE) {
         
         // Avoid session fixation.
-        if (!isset($_SESSION['initiated'])) {
+        if (!isset($_SESSION['INITIATED'])) {
         
             session_regenerate_id();
-            $_SESSION['initiated'] = TRUE;
+            $_SESSION['INITIATED'] = TRUE;
         
         }
         
@@ -76,7 +74,7 @@ function session_secure_init()
         
         if (time() - $_SESSION['CREATED'] > 3600) {
         
-            // Session started more than 60 minates ago.
+            // Session started more than 60 minutes ago.
             session_regenerate_id();    // Change session ID for the current session an invalidate old session ID.
             $_SESSION['CREATED'] = time();  // Update creation time.
         
@@ -109,7 +107,7 @@ function session_secure_init()
             
         } else {
         
-        	$_SESSION['LAST_ACTIVITY'] = time(); // Update last activity timestamp.
+            $_SESSION['LAST_ACTIVITY'] = time(); // Update last activity timestamp.
         
         }
     
