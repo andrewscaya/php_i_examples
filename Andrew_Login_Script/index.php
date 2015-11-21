@@ -240,7 +240,7 @@ if ($postLoginForm === TRUE) {
     }
 	
     $htmlOut .= "\t<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n";
-    $htmlOut .= "\t<script src= \"js/jquery.min.js\"></script>\n";
+    $htmlOut .= "\t<script src=\"js/jquery.min.js\"></script>\n";
     $htmlOut .= "\t<!-- Include all compiled plugins (below), or include individual files as needed -->\n";
     $htmlOut .= "\t<script src=\"js/bootstrap.min.js\"></script>\n";
     $htmlOut .= "\t<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n";
