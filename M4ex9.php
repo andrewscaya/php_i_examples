@@ -25,6 +25,7 @@ $cards = array ('red','blue','green','yellow',
 // shuffle the deck
 shuffle($cards);
 // var_dump($cards);
+$sum = 0;
 foreach($cards as $key => $color) {
 	// figure out number of card based on key
 	$number = $key % 4 + 1;

@@ -1,6 +1,6 @@
 <?php
 $course = array('Art101', 'Life Drawing', 'Prof. McDonnegal');
-$file = 'mycsvfile.txt';
+$file = '/workspace/exercises/mycsvfile.txt';
 /*
 // Open the file to get existing content
 $current = file_get_contents($file);

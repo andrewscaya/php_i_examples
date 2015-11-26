@@ -4,7 +4,7 @@
 // close
 // re-open and display the contents
 
-$filePath = 'mycsvfile.txt';
+$filePath = '/workspace/exercises/mycsvfile.txt';
 if(file_exists($filePath)) {
 	echo "File Found.";
 	$handle       = fopen($filePath, "r+");
